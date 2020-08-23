@@ -1,7 +1,9 @@
 package com.example.searchviewwithrxjava.util
 
 import androidx.appcompat.widget.SearchView
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
 
 object RxSearchObservable {
@@ -21,6 +23,8 @@ object RxSearchObservable {
             }
         })
         return subject
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 }
 
